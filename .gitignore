@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtual env
+.venv/
+venv/
+
+# Env / secrets
+.env
+*.env
+/etc/sbhq.env
+
+# Logs
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Certbot / keys (never commit)
+*.pem
+*.key
+
+# Node (if added later)
+node_modules/
