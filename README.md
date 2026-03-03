@@ -33,3 +33,32 @@ Tap-to-verify badges for service businesses: prove who’s at the door, contact 
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+## Database migrations
+SQL migrations live in `migrations/`.
+
+Apply the Service Pro profile/payment migration:
+```bash
+psql "$DATABASE_URL" -f migrations/001_add_service_pro_profile_fields.sql
+psql "$DATABASE_URL" -f migrations/002_add_company_branding_fields.sql
+psql "$DATABASE_URL" -f migrations/003_create_company_auth_tables.sql
+```
+
+## Production notes
+- Basic security headers are set in FastAPI middleware.
+- In-memory rate limiting is enabled for:
+  - `/auth/pair`
+  - `/t/{company}/{service_pro}/rate`
+  - `/t/{company}/{service_pro}/feedback`
+- Android TWA prep endpoint:
+  - `/.well-known/assetlinks.json`
+  - Set `TWA_PACKAGE_NAME` and `TWA_SHA256_CERT_FINGERPRINTS` in env to populate it.
+
+## Company self-serve routes
+- `GET/POST /company/signup`
+- `GET/POST /company/login`
+- `POST /company/logout`
+- `GET /company`
+- `GET/POST /company/settings`
+- `GET /company/service-pros` + CRUD actions
